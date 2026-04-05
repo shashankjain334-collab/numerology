@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Numerology Pro</title>
+  <style>
+    :root {
+      /* Warm Peach Palette */
+      --bg-primary: #FFCA9B;
+      --bg-secondary: #FFE3C4;
+      --bg-accent: #FFF6ED;
+      --text-primary: #2B2B2B;
+      --text-secondary: #5F4A33;
+      --text-muted: #7B6650;
+      --accent-primary: #C96A37;
+      --accent-secondary: #A04A2E;
+      --status-good: #2A5B2C;
+      --status-mid: #9A5A18;
+      --status-bad: #9A1D1D;
+      --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.16);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      font-size: 18px;
+      color: var(--text-primary);
+      background: #FFCA9B;
+      min-height: 100vh;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    /* ======= HERO SECTION ======= */
+    .hero {
+      display: grid;
+      gap: 18px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .hero-card {
+      width: min(100%, 980px);
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(173, 116, 59, 0.18);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .title {
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin: 0;
+      color: var(--text-primary);
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 20px;
+      line-height: 1.7;
+      max-width: 820px;
+      text-align: center;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 16px 0 0;
+    }
+
+    .top-brand-bar {
+      width: min(840px, 100%);
+      margin: 0 auto;
+      padding: 0 0 8px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-align: center;
+    }
+    .company-name {
+      margin: 0;
+      font-size: clamp(34px, 3.6vw, 44px);
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    }
+    .company-phone {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      background: rgba(221, 148, 98, 0.15);
+      border-radius: 24px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .badge:hover {
+      background: rgba(209, 105, 61, 0.15);
+      color: var(--accent-secondary);
+      transform: translateY(-2px);
+    }
+
+
+    /* ======= MAIN CONTENT ======= */
+    .layout {
+      display: grid;
+      gap: 60px;
+    }
+
+    .panel {
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(209, 105, 61, 0.16);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .panel h2 {
+      margin: 0 0 32px 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      text-align: center;
+    }
+
+    .stack {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ======= FORM ELEMENTS ======= */
+    label {
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    select {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-family: inherit;
+      border: 2px solid rgba(209, 105, 61, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-primary);
+      outline: none;
+      transition: var(--transition);
+      caret-color: var(--accent-primary);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 0.5rem center;
+      background-repeat: no-repeat;
+      background-size: 1.5em 1.5em;
+      padding-right: 2.5rem;
+    }
+
+    select:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    select:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(201, 106, 55, 0.18);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 18px;
+      font-family: inherit;
+      border: 2px solid rgba(209, 105, 61, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-primary);
+      outline: none;
+      transition: var(--transition);
+      caret-color: var(--accent-primary);
+    }
+
+    input:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 4px rgba(201, 106, 55, 0.18);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .date-field {
+      position: relative;
+    }
+
+    .date-field input {
+      padding-right: 3.5rem;
+    }
+
+    .calendar-button {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      cursor: pointer;
+      font-size: 19px;
+      display: grid;
+      place-items: center;
+      transition: var(--transition);
+    }
+
+    .calendar-button:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .hidden-date {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+      margin: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hint {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    /* ======= BUTTONS ======= */
+    .button-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    button {
+      border: none;
+      padding: 16px 24px;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    button:active {
+      transform: translateY(-1px);
+    }
+
+    button:focus {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+      color: #fff;
+      font-weight: 700;
+      grid-column: span 2;
+      box-shadow: var(--shadow-md);
+    }
+
+    .primary:hover {
+      filter: brightness(1.08);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .secondary {
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--text-primary);
+      border: 1px solid rgba(209, 105, 61, 0.25);
+    }
+
+    .secondary:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: var(--accent-primary);
+    }
+
+    /* ======= METRICS ======= */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(30, 45, 77, 0.3);
+    }
+
+    .metric {
+      padding: 32px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius);
+      text-align: center;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(209, 105, 61, 0.14);
+    }
+
+    .metric:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .metric .k {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .metric .v {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--accent-primary);
+      line-height: 1;
+    }
+
+    /* ======= RESULTS ======= */
+    .result-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    .section-title {
+      margin: 0 0 20px 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      text-align: center;
+    }
+
+    .box {
+      padding: 32px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--radius);
+      line-height: 1.75;
+      font-size: 18px;
+      color: var(--text-primary);
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(209, 105, 61, 0.12);
+    }
+
+    .box:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* ======= VERDICT ======= */
+    .verdict {
+      padding: 48px 20px;
+      border-radius: var(--radius-lg);
+      font-weight: 700;
+      font-size: 20px;
+      text-align: center;
+      letter-spacing: 0.01em;
+      line-height: 1.5;
+      transition: var(--transition);
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+    }
+
+    .good {
+      background: linear-gradient(135deg, rgba(42, 91, 44, 0.16) 0%, rgba(255, 255, 255, 0.64) 100%);
+      color: var(--status-good);
+      border: 1px solid rgba(42, 91, 44, 0.15);
+    }
+
+    .mid {
+      background: linear-gradient(135deg, rgba(154, 90, 24, 0.16) 0%, rgba(255, 255, 255, 0.64) 100%);
+      color: var(--status-mid);
+      border: 1px solid rgba(154, 90, 24, 0.15);
+    }
+
+    .bad {
+      background: linear-gradient(135deg, rgba(154, 29, 29, 0.16) 0%, rgba(255, 255, 255, 0.64) 100%);
+      color: var(--status-bad);
+      border: 1px solid rgba(154, 29, 29, 0.15);
+    }
+
+    /* ======= PAIR CARDS ======= */
+    .pair-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      align-items: stretch;
+      margin-top: 16px;
+    }
+
+    .pair-card {
+      padding: 24px 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(209, 105, 61, 0.14);
+      border-radius: var(--radius);
+      transition: var(--transition);
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pair-card:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(209, 105, 61, 0.25);
+    }
+
+    .pair-code {
+      color: var(--accent-secondary);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .pair-meta {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .pair-card p {
+      margin: 0;
+      color: var(--text-primary);
+      line-height: 1.85;
+      font-size: 17px;
+    }
+
+    .section-note {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .no-results {
+      opacity: 0.78;
+      background: rgba(15, 21, 53, 0.16);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* ======= FOOTER ======= */
+    .foot {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(30, 45, 77, 0.3);
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ======= RESPONSIVE ======= */
+    @media (min-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+      .hero-card {
+        align-items: center;
+        text-align: center;
+      }
+      .title, .subtitle {
+        text-align: center;
+      }
+      .badge-row {
+        justify-content: center;
+      }
+      .layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+      .stack {
+        max-width: none;
+        margin: 0;
+      }
+      .button-row {
+        grid-template-columns: 1fr 1fr;
+      }
+      .primary {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .app {
+        padding: 40px 16px;
+        gap: 60px;
+      }
+      .hero-card, .panel {
+        padding: 32px 16px;
+      }
+      .button-row {
+        grid-template-columns: 1fr;
+      }
+      .primary {
+        grid-column: span 1;
+      }
+      .metric-grid {
+        gap: 16px;
+      }
+      .metric .v {
+        font-size: 32px;
+      }
+      .verdict {
+        font-size: 18px;
+        padding: 32px 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app {
+        padding: 32px 12px;
+        gap: 48px;
+      }
+      .hero-card, .panel {
+        padding: 24px 12px;
+      }
+      .metric-grid {
+        margin-top: 32px;
+        padding-top: 32px;
+      }
+      .metric .v {
+        font-size: 28px;
+      }
+      .badge {
+        font-size: 13px;
+        padding: 8px 14px;
+      }
+    }
+
+    /* ======= PRINT ======= */
+    @page {
+      size: A4 portrait;
+      margin: 10mm;
+    }
+    @media print {
+      html, body {
+        width: auto !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+      .app {
+        padding: 0 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+      }
+      .hero-card,
+      .mini-card,
+      .form-panel,
+      .button-row,
+      .foot,
+      .subtitle,
+      .badge-row,
+      .calendar-button,
+      .stack,
+      .hint,
+      input,
+      select {
+        display: none !important;
+      }
+      .app::before {
+        content: none !important;
+      }
+      .layout,
+      .result-grid {
+        display: block !important;
+        width: 100% !important;
+        gap: 0 !important;
+        margin: 0 !important;
+      }
+      .panel {
+        display: block !important;
+        width: 100% !important;
+        padding: 8px 10px !important;
+        margin: 0 0 10px !important;
+        border: 1px solid #ccc !important;
+        background: #fff !important;
+        box-shadow: none !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+      }
+      .panel h2 {
+        font-size: 16px !important;
+        margin: 0 0 8px !important;
+      }
+      .title,
+      .section-title,
+      .pair-code {
+        color: #000 !important;
+        font-size: 14px !important;
+        margin: 0 0 6px !important;
+      }
+      .box,
+      .pair-card,
+      .metric,
+      .verdict {
+        background: #fff !important;
+        color: #000 !important;
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+        margin: 0 0 8px !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+      }
+      .pair-grid {
+        display: block !important;
+      }
+      .pair-card {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 0 8px !important;
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+      }
+      .metric-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      .metric {
+        flex: 1 1 32% !important;
+        padding: 8px !important;
+        text-align: center !important;
+      }
+      .pair-card p,
+      .box,
+      .verdict,
+      .section-note,
+      .pair-meta {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+      }
+      .print-hide {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div class="top-brand-bar">
+        <p class="company-name">BHAGYA SETU</p>
+        <p class="company-phone">Phone: +91 98765 43210</p>
+      </div>
+      <div class="hero-card">
+        <h1 class="title">Numerology Pro</h1>
+        <p class="subtitle">Our platform offers numerology-inspired insights based on details such as birth dates, mobile numbers, house numbers, and vehicle numbers. Using established numerological principles, we derive values like Moolank and Bhagyank, explore number relationships, and highlight patterns that may provide an interesting perspective on your numbers.
+
+Designed to encourage self-reflection and curiosity, these interpretations present a thoughtful way to explore numerical patterns in everyday life.</p>
+        <div class="badge-row">
+          <span class="badge">Instant Analysis</span>
+          <span class="badge">Numerology Expert System</span>
+          <span class="badge">Client-Ready Reports</span>
+          <span class="badge">PDF Export</span>
+          <span class="badge">Mobile & Desktop</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside class="panel form-panel">
+        <h2>Numerology Calculator</h2>
+        <div class="stack">
+          <div>
+            <label for="dob">Date of Birth</label>
+            <div class="date-field">
+              <input id="dob" type="text" inputmode="numeric" maxlength="10" placeholder="DD/MM/YYYY" autocomplete="bday" oninput="formatDOBInput(event)" />
+              <button type="button" class="calendar-button" onclick="openDatePicker()" aria-label="Open calendar">📅</button>
+            </div>
+            <input id="dobPicker" type="date" onchange="syncDOBFromCalendar()" aria-hidden="true" class="hidden-date" />
+            <div class="hint">Use the calendar button or type DD/MM/YYYY. Invalid characters are removed automatically.</div>
+          </div>
+          <div>
+            <label for="analysisType">Analysis Type</label>
+            <select id="analysisType" onchange="updateInputField()">
+              <option value="mobile">Mobile Number</option>
+              <option value="house">House Number</option>
+              <option value="car">Car Number</option>
+            </select>
+            <div class="hint">Select the type of number you want to analyze for compatibility.</div>
+          </div>
+          <div>
+            <label id="numberLabel" for="numberInput">Mobile Number</label>
+            <input id="numberInput" placeholder="10-15 digits" />
+            <div id="numberHint" class="hint">Enter your complete mobile number. Zeros are removed for analysis. Duplicate pairs are skipped.</div>
+          </div>
+          <div class="button-row">
+            <button type="button" class="primary" onclick="generateReport()">Generate Analysis</button>
+            <button type="button" class="secondary" onclick="downloadTXT()">Export TXT</button>
+            <button type="button" class="secondary" onclick="printReport()">Print PDF</button>
+            <button type="button" class="secondary" onclick="clearAll()">Reset</button>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <span class="k">Moolank</span>
+            <span class="v" id="moolank">—</span>
+          </div>
+          <div class="metric">
+            <span class="k">Bhagyank</span>
+            <span class="v" id="bhagyank">—</span>
+          </div>
+          <div class="metric">
+            <span class="k" id="numberRootLabel">Mobile Root</span>
+            <span class="v" id="numberRoot">—</span>
+          </div>
+        </div>
+
+        <div class="foot">Professional numerology analysis for mobile, house, and car numbers. English-only system designed for accurate modern calculations and client consultations.</div>
+      </aside>
+
+      <section class="result-grid">
+        <div class="panel">
+          <h2 id="compatibilityTitle">Compatibility Assessment</h2>
+          <div id="verdict" class="verdict mid">Fill in your details and click Generate Analysis to see your compatibility profile.</div>
+          <div class="section-title">Detailed Insight</div>
+          <div id="compatibilityBox" class="box">Your numerological compatibility analysis will appear here...</div>
+        </div>
+        <div class="panel" id="pairPanel">
+          <h2>Digit Pair Analysis</h2>
+          <div class="section-note">Each pair is generated from the actual selected number sequence, with a concise meaning to help you understand the energy behind it.</div>
+          <div id="pairResults" class="pair-grid">
+            <div class="pair-card no-results">
+              <span class="pair-code">No analysis yet</span>
+              <span class="pair-meta">Generate results to display your pair interpretations.</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel" id="clusterPanel">
+          <h2>Pattern Recognition</h2>
+          <div class="section-note">Detect the strongest repeated digit clusters and learn the dominant energy behind the selected number.</div>
+          <div id="clusterResults" class="pair-grid">
+            <div class="pair-card no-results">
+              <span class="pair-code">No pattern detected</span>
+              <span class="pair-meta">Cluster effects will appear here after generating analysis.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    function updateInputField() {
+      const type = document.getElementById('analysisType').value;
+      const label = document.getElementById('numberLabel');
+      const input = document.getElementById('numberInput');
+      const hint = document.getElementById('numberHint');
+      if (type === 'mobile') {
+        label.textContent = 'Mobile Number';
+        input.placeholder = '10-15 digits';
+        input.inputMode = 'numeric';
+        input.pattern = '[0-9]*';
+        input.maxLength = 15;
+        hint.textContent = 'Enter your complete mobile number. Zeros are removed for analysis. Duplicate pairs are skipped.';
+      } else if (type === 'house') {
+        label.textContent = 'House Number';
+        input.placeholder = 'e.g., 123 or 45A';
+        input.inputMode = 'text';
+        input.removeAttribute('pattern');
+        input.removeAttribute('maxlength');
+        hint.textContent = 'Enter your house/flat number. Letters are ignored, zeros removed for root calculation.';
+      } else if (type === 'car') {
+        label.textContent = 'Car Number';
+        input.placeholder = 'Enter Last 4 Digits';
+        input.inputMode = 'numeric';
+        input.pattern = '[0-9]*';
+        input.maxLength = 4;
+        hint.textContent = 'Enter the last 4 digits of your car registration number. Only these digits are used for analysis.';
+      }
+      input.oninput = () => handleNumberInput(type);
+    }
+
+    function handleNumberInput(type) {
+      const input = document.getElementById('numberInput');
+      if (type === 'mobile') {
+        input.value = input.value.replace(/\D/g, '');
+      }
+    }
+
+    function formatDOBInput(event) {
+      const input = event.target;
+      let digits = input.value.replace(/\D/g, '').slice(0, 8);
+      if (digits.length > 4) {
+        digits = digits.replace(/^(\d{2})(\d{2})(\d{1,4}).*/, '$1/$2/$3');
+      } else if (digits.length > 2) {
+        digits = digits.replace(/^(\d{2})(\d{1,2}).*/, '$1/$2');
+      }
+      input.value = digits;
+    }
+
+    function openDatePicker() {
+      const picker = document.getElementById('dobPicker');
+      if (picker.showPicker) {
+        picker.showPicker();
+      }
+      picker.focus();
+    }
+
+    function syncDOBFromCalendar() {
+      const picker = document.getElementById('dobPicker');
+      const raw = picker.value;
+      if (!raw) return;
+      const [year, month, day] = raw.split('-');
+      if (!year || !month || !day) return;
+      document.getElementById('dob').value = `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+    }
+
+    function onlyDigits(value) {
+      return (value || '').replace(/\D/g, '');
+    }
+
+    const pairData = {
+      "12":"This pair gives an attractive and photogenic presence, and support from the life partner. It often shows practical thinking with a pleasant outer image and a habit of preserving resources, though the person may still need consistency to convert potential into lasting gain.",
+      "13":"This pair makes a person a good advisor or counsellor, popular in their circle, highly professional, and known for knowledge and reputation. It often supports a strong public image, practical judgement, and respect through competence, especially when the person stays disciplined and uses their knowledge constructively.",
+      "14":"This pair can bring loan pressure, legal notices, health strain, or the need to work extra hard for stability. It often shows a life pattern where progress comes, but only after extra effort, pressure, and repeated responsibility, so financial and legal decisions should be handled carefully.",
+      "15":"This pair shows the father's popularity, strong push toward self-dependence, benefits through authority or government, and money without excessive struggle at times. It often gives confidence, visibility, and an urge to do one's own work, though discipline is needed so easy gains are not wasted.",
+      "16":"This pair may bring spouse health sensitivity, marriage-related misunderstandings, lower income during certain phases, and skin or urinary sensitivity. It often reflects emotional strain in relationships and financial tightening until maturity, so patience and clear communication become important.",
+      "17":"This pair keeps money-related work active, may connect the person with someone in government or a strong institution, and can support early job or early marriage. It often shows steady financial movement and practical opportunity, but also clever profit-seeking patterns and the possibility of dual commitments if values become weak.",
+      "18":"This pair can create pressure around spouse health, government matters, frequent job change, father-son understanding issues, legal matters, or disturbance in family peace. It gives strong drive and struggle energy, but if handled impulsively it can turn routine pressures into avoidable conflict.",
+      "19":"This pair shows ownership energy, high ambition, possessive nature, and a strong self-claiming pattern. It often gives the urge to rise, hold status, and protect what one feels is theirs, but the same force can become rigid, dominant, or difficult in close relationships if ego rises too much.",
+      "21":"This pair may show spending more than one earns, along with an attractive face or outer appeal. It often gives social charm and a pleasing impression, but money management requires awareness because the desire to enjoy or spend can outrun discipline.",
+      "23":"This pair shows many opponents or hidden friction, yet the person usually escapes serious harm. It supports communication, survival instinct, and the ability to manage situations intelligently, but can also make the person egoistic or too self-focused, and may show emotional distance around children or legacy expectations.",
+      "24":"This pair gives patience and a planning mind, but also a tendency to keep generating ideas without sticking to them for long. It may create a destructive or overactive thinking loop, and can show sensitivity around eyesight, heart strain, or accident-prone impulsiveness if self-control weakens.",
+      "25":"This pair is often linked with healing hands, success in medical or occult lines, gain through travel by air, and strong knowledge. It gives intuitive skill and a capacity to help others, though finance-related matters should be handled carefully because judgement can become overly idealistic.",
+      "26":"This pair may bring barriers in studies, breaks in education, changes in learning environment, friction with in-laws, attraction toward money or the opposite sex, and energy depletion. It often shows sensitivity around sugar, stamina, or reproductive balance, so routine and restraint become important.",
+      "27":"This pair can indicate joint pain, arthritis tendency, or urinary sensitivity. It often reflects a number that makes the person endure silently and carry strain in the body, especially when stress is stored rather than released.",
+      "28":"This pair can bring decent money, but also expenditure on medicines or hospitals, family patterns involving dual marriages, bad company risk, water caution, ego, and accident-proneness. It shows a person who may gain and lose in phases, so environment and associations matter greatly.",
+      "29":"This pair carries Moon-Mars and Lakshmi-yoga energy, giving decent money, sudden opportunities, support through others, and benefits that may come without extreme hard work. At the same time it can create ego, emotional dependency, and unstable decision-making, so money may come but still require wisdom to sustain.",
+      "31":"This pair makes a person a good advisor or counsellor, popular in their circle, highly professional, and known for knowledge and reputation. It often supports a strong public image, practical judgement, and respect through competence, especially when the person stays disciplined and uses their knowledge constructively.",
+      "32":"This pair shows many opponents or hidden friction, yet the person usually escapes serious harm. It supports communication, survival instinct, and the ability to manage situations intelligently, but can also make the person egoistic or too self-focused, and may show emotional distance around children or legacy expectations.",
+      "34":"This pair may show leg trembling, paralysis tendency in the family, breathing strain such as asthma, or heart-related shocks in the family line. It often indicates a sensitive physical pattern where stress, fear, or hereditary load may show strongly if ignored.",
+      "35":"This pair often shows success away from family, luck after leaving the parental base, fear of father, decent economic condition but cash-flow issues. It gives progress when the person builds an independent path, though liquid money and emotional grounding may remain fluctuating.",
+      "36":"This pair makes a person principle-oriented, knowledgeable, and religious, but can also bring barriers in studies or difficulty presenting their knowledge effectively. It often gives improvement after marriage or higher learning, yet the person may know more than they can immediately express.",
+      "37":"This pair gives Rajyoga, success through knowledge, advisory strength, complete personality, and visibility in love or attraction-related matters. It often creates a well-rounded presence, strong judgement, and growth through intelligence, guidance, and mature decision-making.",
+      "38":"This pair can support real-estate work, counselling, consultancy, and the role of peacemaker. It often shows friction with family before stability, and success may increase after marriage, especially when the person learns to balance peacekeeping with self-interest.",
+      "39":"This pair may create show-off tendency, dual nature, strong social visibility, and hard work with delayed results. It can suit doctors, politicians, leaders, or astrologers, but image management may become louder than inner stability if not handled carefully.",
+      "41":"This pair can bring loan pressure, legal notices, health strain, or the need to work extra hard for stability. It often shows a life pattern where progress comes, but only after extra effort, pressure, and repeated responsibility, so financial and legal decisions should be handled carefully.",
+      "42":"This pair gives patience and a planning mind, but also a tendency to keep generating ideas without sticking to them for long. It may create a destructive or overactive thinking loop, and can show sensitivity around eyesight, heart strain, or accident-prone impulsiveness if self-control weakens.",
+      "43":"This pair may show leg trembling, paralysis tendency in the family, breathing strain such as asthma, or heart-related shocks in the family line. It often indicates a sensitive physical pattern where stress, fear, or hereditary load may show strongly if ignored.",
+      "45":"This pair may keep a person frequently connected to courts, hospitals, restrictions, loss, police matters, or FIR-like situations. It is intelligent but often intense, bringing repeated confrontation with systems, rules, or crisis-driven environments.",
+      "46":"This pair can bring skill imbalance, extra relationships, inter-caste marriage patterns, conceiving difficulty, or dual marriage tendencies. It increases attraction and emotional complexity, so relationships, desire, and long-term stability need careful handling.",
+      "47":"This pair gives honesty, brilliance, and practical cleverness. It often creates a jugadu, resourceful, and mentally sharp person who can find workable solutions quickly and maintain credibility at the same time.",
+      "48":"This pair can indicate deep physical sensitivity, sudden health shocks, fire or accident caution, blood-related strain, dissatisfaction in intimate life, and harmful habit patterns. It is a heavy pair and should be interpreted as a warning to stay careful with lifestyle and risk-taking.",
+      "49":"This pair can support risky work, uniformed roles, discipline-heavy jobs, or environments linked with authority and danger. It can also produce a naughty, rebellious, or criminally inclined mindset if the person goes off track, so direction matters a lot.",
+      "51":"This pair shows the father's popularity, strong push toward self-dependence, benefits through authority or government, and money without excessive struggle at times. It often gives confidence, visibility, and an urge to do one's own work, though discipline is needed so easy gains are not wasted.",
+      "52":"This pair is often linked with healing hands, success in medical or occult lines, gain through travel by air, and strong knowledge. It gives intuitive skill and a capacity to help others, though finance-related matters should be handled carefully because judgement can become overly idealistic.",
+      "53":"This pair often shows success away from family, luck after leaving the parental base, fear of father, decent economic condition but cash-flow issues. It gives progress when the person builds an independent path, though liquid money and emotional grounding may remain fluctuating.",
+      "54":"This pair may keep a person frequently connected to courts, hospitals, restrictions, loss, police matters, or FIR-like situations. It is intelligent but often intense, bringing repeated confrontation with systems, rules, or crisis-driven environments.",
+      "56":"This pair can make a person hesitate in asking for their own money, remain business-minded, and keep generating commercial ideas. It may also show difficulty completing higher studies and an important landmark near home, while teaching the person to convert thought into organised execution.",
+      "57":"This pair gives speaking, writing, PR, and expressive strength. People often come for advice, and relation with mother, sister, or daughter can remain important; still, the person must avoid emotional overextension or talking beyond practical limits.",
+      "58":"This pair can show money getting stuck, a calculated mind, work linked with finance or money management, and a tendency to dream in lakhs and crores. It is ambitious and commercially aware, but liquidity and timely release of funds can remain a challenge.",
+      "59":"This pair can damage relationships through speech, yet it is also research-oriented and often seen in doctors, surgeons, engineers, and technically sharp people. Strong intellect comes here, but words can cut deeper than intended.",
+      "61":"This pair may bring spouse health sensitivity, marriage-related misunderstandings, lower income during certain phases, and skin or urinary sensitivity. It often reflects emotional strain in relationships and financial tightening until maturity, so patience and clear communication become important.",
+      "62":"This pair may bring barriers in studies, breaks in education, changes in learning environment, friction with in-laws, attraction toward money or the opposite sex, and energy depletion. It often shows sensitivity around sugar, stamina, or reproductive balance, so routine and restraint become important.",
+      "63":"This pair makes a person principle-oriented, knowledgeable, and religious, but can also bring barriers in studies or difficulty presenting their knowledge effectively. It often gives improvement after marriage or higher learning, yet the person may know more than they can immediately express.",
+      "64":"This pair can bring skill imbalance, extra relationships, inter-caste marriage patterns, conceiving difficulty, or dual marriage tendencies. It increases attraction and emotional complexity, so relationships, desire, and long-term stability need careful handling.",
+      "65":"This pair can make a person hesitate in asking for their own money, remain business-minded, and keep generating commercial ideas. It may also show difficulty completing higher studies and an important landmark near home, while teaching the person to convert thought into organised execution.",
+      "67":"This pair can bring love marriage patterns, spouse health issues, disturbed married life, remarriage possibility, a calculative mind, musical taste, and true-lover intensity. It gives deep emotional investment, but long-term harmony demands maturity and balance.",
+      "68":"This pair can indicate eye problems, issues in one organ, major surgery, chronic heart sensitivity, or disturbance in married life. It is a serious pair that should be read as caution around health discipline, emotional burden, and long-term strain.",
+      "69":"This pair gives good management skill, planning ability, and involvement with the opposite sex. It creates administrative capacity and practical social intelligence, but pleasure, attraction, or over-involvement in relationships can become distracting.",
+      "71":"This pair keeps money-related work active, may connect the person with someone in government or a strong institution, and can support early job or early marriage. It often shows steady financial movement and practical opportunity, but also clever profit-seeking patterns and the possibility of dual commitments if values become weak.",
+      "72":"This pair can indicate joint pain, arthritis tendency, or urinary sensitivity. It often reflects a number that makes the person endure silently and carry strain in the body, especially when stress is stored rather than released.",
+      "73":"This pair gives Rajyoga, success through knowledge, advisory strength, complete personality, and visibility in love or attraction-related matters. It often creates a well-rounded presence, strong judgement, and growth through intelligence, guidance, and mature decision-making.",
+      "74":"This pair gives honesty, brilliance, and practical cleverness. It often creates a jugadu, resourceful, and mentally sharp person who can find workable solutions quickly and maintain credibility at the same time.",
+      "75":"This pair gives speaking, writing, PR, and expressive strength. People often come for advice, and relation with mother, sister, or daughter can remain important; still, the person must avoid emotional overextension or talking beyond practical limits.",
+      "76":"This pair can bring love marriage patterns, spouse health issues, disturbed married life, remarriage possibility, a calculative mind, musical taste, and true-lover intensity. It gives deep emotional investment, but long-term harmony demands maturity and balance.",
+      "78":"This pair shows a healer, idealistic and somewhat sad nature, the ability to solve problems by personal power, a rule-following pattern, and the need to stay away from bad habits. It suits spiritual discipline, healing service, and meditation-oriented growth.",
+      "79":"This pair often shows success after separation from father or after building an independent path, along with good knowledge. It creates a thoughtful personality that gains more once emotional dependence reduces and self-direction increases.",
+      "81":"This pair can create pressure around spouse health, government matters, frequent job change, father-son understanding issues, legal matters, or disturbance in family peace. It gives strong drive and struggle energy, but if handled impulsively it can turn routine pressures into avoidable conflict.",
+      "82":"This pair can bring decent money, but also expenditure on medicines or hospitals, family patterns involving dual marriages, bad company risk, water caution, ego, and accident-proneness. It shows a person who may gain and lose in phases, so environment and associations matter greatly.",
+      "83":"This pair can support real-estate work, counselling, consultancy, and the role of peacemaker. It often shows friction with family before stability, and success may increase after marriage, especially when the person learns to balance peacekeeping with self-interest.",
+      "84":"This pair can indicate deep physical sensitivity, sudden health shocks, fire or accident caution, blood-related strain, dissatisfaction in intimate life, and harmful habit patterns. It is a heavy pair and should be interpreted as a warning to stay careful with lifestyle and risk-taking.",
+      "85":"This pair can show money getting stuck, a calculated mind, work linked with finance or money management, and a tendency to dream in lakhs and crores. It is ambitious and commercially aware, but liquidity and timely release of funds can remain a challenge.",
+      "86":"This pair can indicate eye problems, issues in one organ, major surgery, chronic heart sensitivity, or disturbance in married life. It is a serious pair that should be read as caution around health discipline, emotional burden, and long-term strain.",
+      "87":"This pair shows a healer, idealistic and somewhat sad nature, the ability to solve problems by personal power, a rule-following pattern, and the need to stay away from bad habits. It suits spiritual discipline, healing service, and meditation-oriented growth.",
+      "89":"This pair gives an argumentative nature, work with principles, possible chronic issues later in life, legal or iron-related themes, and a tendency to challenge others directly. It can make a person strong-willed and justice-oriented, but too much hardness may create friction.",
+      "91":"This pair shows ownership energy, high ambition, possessive nature, and a strong self-claiming pattern. It often gives the urge to rise, hold status, and protect what one feels is theirs, but the same force can become rigid, dominant, or difficult in close relationships if ego rises too much.",
+      "92":"This pair carries Moon-Mars and Lakshmi-yoga energy, giving decent money, sudden opportunities, support through others, and benefits that may come without extreme hard work. At the same time it can create ego, emotional dependency, and unstable decision-making, so money may come but still require wisdom to sustain.",
+      "93":"This pair may create show-off tendency, dual nature, strong social visibility, and hard work with delayed results. It can suit doctors, politicians, leaders, or astrologers, but image management may become louder than inner stability if not handled carefully.",
+      "94":"This pair can support risky work, uniformed roles, discipline-heavy jobs, or environments linked with authority and danger. It can also produce a naughty, rebellious, or criminally inclined mindset if the person goes off track, so direction matters a lot.",
+      "95":"This pair can damage relationships through speech, yet it is also research-oriented and often seen in doctors, surgeons, engineers, and technically sharp people. Strong intellect comes here, but words can cut deeper than intended.",
+      "96":"This pair gives good management skill, planning ability, and involvement with the opposite sex. It creates administrative capacity and practical social intelligence, but pleasure, attraction, or over-involvement in relationships can become distracting.",
+      "97":"This pair often shows success after separation from father or after building an independent path, along with good knowledge. It creates a thoughtful personality that gains more once emotional dependence reduces and self-direction increases.",
+      "98":"This pair gives an argumentative nature, work with principles, possible chronic issues later in life, legal or iron-related themes, and a tendency to challenge others directly. It can make a person strong-willed and justice-oriented, but too much hardness may create friction."
+    };
+
+    const digitEffects = {
+      "1":"Repeated 1 energy can increase ego, attitude, fast speech, communication friction, authority clashes, hair-fall tendency, or bone sensitivity. In moderate quantity it gives leadership and self-drive; in excess it can make the person too rigid or sharp.",
+      "2":"Repeated 2 energy can increase mood fluctuation, emotional dependence, low emotional stability, blood-pressure sensitivity, or blood-related weakness. In balanced quantity it gives softness and receptivity; in excess it can create depression-like heaviness.",
+      "3":"Repeated 3 energy increases hunger for knowledge, talkativeness, trust in others, and expansion in body or weight. In balance it gives wisdom and expression; in excess it can scatter focus and create over-sharing.",
+      "4":"Repeated 4 energy deepens delay, struggle, headache tendency, gastric issues, and a feeling of sorrow or heaviness in life. In balance it gives endurance and realism; in excess it can make progress feel blocked.",
+      "5":"Repeated 5 energy can increase laziness or lethargy but also boost communication, trade sense, adaptability, and money movement. In excess it can create inconsistency—good potential, but uneven follow-through.",
+      "6":"Repeated 6 energy increases luxury, travel, attraction to comfort, brands, and pleasure. In balance it gives charm and refinement; in excess it can lead to indulgence, overspending, or dependence on comfort.",
+      "7":"Repeated 7 energy can increase mood swings, overthinking, spiritual pull, international disturbance, and relationship sensitivity. In balance it gives insight; in excess it creates emotional distance and mental wandering.",
+      "8":"Repeated 8 energy strengthens delay, disturbances, obstacles, pressure, and burden. In balance it gives seriousness and endurance; in excess it can make life feel heavy, slow, or restricted.",
+      "9":"Repeated 9 energy can increase debt, anger, blood-heat, forceful action, and impulsive reactions. In balance it gives courage and drive; in excess it can trigger conflicts, haste, or depletion."
+    };
+
+    const friendMap = {
+      "1": ["1", "2", "3", "9"],
+      "2": ["1", "2", "3", "5"],
+      "3": ["1", "2", "3", "5", "6", "9"],
+      "4": ["4", "5", "6", "8"],
+      "5": ["1", "3", "5", "6"],
+      "6": ["3", "4", "5", "6", "8", "9"],
+      "7": ["2", "7", "9"],
+      "8": ["4", "6", "8"],
+      "9": ["1", "3", "6", "7", "9"]
+    };
+
+    function onlyDigits(value) { return (value || '').replace(/\D/g, ''); }
+    function digitalRootFromDigitsString(digitsString) {
+      if (!digitsString) return '';
+      let sum = digitsString.split('').reduce((a, b) => a + Number(b), 0);
+      while (sum > 9) sum = String(sum).split('').reduce((a, b) => a + Number(b), 0);
+      return String(sum);
+    }
+    function parseDOB(raw) {
+      if (!raw) return null;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+        const [yyyy, mm, dd] = raw.split('-');
+        const day = Number(dd), month = Number(mm), year = Number(yyyy);
+        if (!day || !month || !year || day > 31 || month > 12) return null;
+        return { dd, mm, yyyy, digits: dd + mm + yyyy };
+      }
+      const digits = onlyDigits(raw);
+      if (digits.length !== 8) return null;
+      const dd = digits.slice(0, 2), mm = digits.slice(2, 4), yyyy = digits.slice(4, 8);
+      const day = Number(dd), month = Number(mm), year = Number(yyyy);
+      if (!day || !month || !year || day > 31 || month > 12) return null;
+      return { dd, mm, yyyy, digits };
+    }
+    function removeZeros(mobileDigits) { return mobileDigits.replace(/0/g, ''); }
+    function collapseSameConsecutiveDigits(numberString) {
+      if (!numberString) return '';
+      let output = numberString[0];
+      for (let i = 1; i < numberString.length; i++) if (numberString[i] !== numberString[i - 1]) output += numberString[i];
+      return output;
+    }
+    function findConsecutiveClusters(numberString) {
+      const clusters = [];
+      if (!numberString) return clusters;
+      let count = 1;
+      for (let i = 1; i <= numberString.length; i++) {
+        if (i < numberString.length && numberString[i] === numberString[i - 1]) count += 1;
+        else { if (count >= 3) clusters.push({ digit: numberString[i - 1], count }); count = 1; }
+      }
+      return clusters;
+    }
+    function buildPairsFromOriginalZeroRemoved(zeroRemoved) {
+      const pairs = [];
+      for (let i = 0; i < zeroRemoved.length - 1; i++) {
+        const a = zeroRemoved[i], b = zeroRemoved[i + 1];
+        if (a === b) continue;
+        pairs.push(a + b);
+      }
+      return pairs;
+    }
+    function relation(root, birthNumber) {
+      if (!root || !birthNumber) return 'neutral';
+      if (String(root) === String(birthNumber)) return 'same';
+      return (friendMap[String(birthNumber)] || []).includes(String(root)) ? 'friend' : 'enemy';
+    }
+    function getSuitability(root, moolank, bhagyank) {
+      const r1 = relation(root, moolank), r2 = relation(root, bhagyank);
+      if (r1 === 'same' || r2 === 'same') {
+        return {
+          cls: 'good',
+          line: 'This number is highly favourable for you.',
+          paragraph: `Your mobile root is ${root}, and it directly matches one of your core birth numbers. That usually means the number aligns naturally with your personal frequency. Its good effects become easier to hold, and its difficult effects tend to feel more manageable in real life.`
+        };
+      }
+      if ((r1 === 'friend' && r2 !== 'enemy') || (r2 === 'friend' && r1 !== 'enemy') || (r1 === 'friend' && r2 === 'friend')) {
+        return {
+          cls: 'mid',
+          line: 'This number is supportive for you.',
+          paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank} and your Bhagyank is ${bhagyank}. This combination is supportive overall. It may not feel identical to your core pattern, but it usually works without creating strong resistance and can still give stable usable results.`
+        };
+      }
+      return {
+        cls: 'bad',
+        line: 'This number may not suit you and can create resistance.',
+        paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank} and your Bhagyank is ${bhagyank}. This combination shows more friction than support. The number may still produce activity, but it can feel heavy, inconsistent, or harder to sustain smoothly over time.`
+      };
+    }
+    function renderPairCards(pairs) {
+      if (!pairs.length) {
+        return `<div class="pair-card no-results"><span class="pair-code">No valid pairs</span><span class="pair-meta">No valid pairs were generated from this mobile number.</span></div>`;
+      }
+      return pairs.map((pair, index) => {
+        const meaning = pairData[pair] || 'No stored meaning was found for this pair.';
+        return `<div class="pair-card"><span class="pair-code">Pair ${index + 1}: ${pair}</span><span class="pair-meta">Generated in actual sequence from the entered mobile number.</span><p>${meaning}</p></div>`;
+      }).join('');
+    }
+    function renderClusterCards(clusters) {
+      if (!clusters.length) {
+        return `<div class="pair-card no-results"><span class="pair-code">No cluster patterns</span><span class="pair-meta">No 3+ consecutive same-digit cluster was found in this mobile number.</span></div>`;
+      }
+      return clusters.map((cluster, index) => {
+        const visual = cluster.digit.repeat(cluster.count);
+        const meaning = digitEffects[String(cluster.digit)] || 'No stored dominance meaning was found for this digit.';
+        return `<div class="pair-card"><span class="pair-code">Cluster ${index + 1}: ${visual}</span><span class="pair-meta">A 3+ same-digit sequence detected in the original mobile number after zero removal.</span><p>${meaning}</p></div>`;
+      }).join('');
+    }
+    function generateReport() {
+      const dobInput = document.getElementById('dob').value.trim();
+      const type = document.getElementById('analysisType').value;
+      const numberInput = document.getElementById('numberInput').value.trim();
+      const dob = parseDOB(dobInput);
+      if (!dob) { alert('Please enter DOB as DD/MM/YYYY or DDMMYYYY, for example 26/04/1967 or 26041967.'); return; }
+      let rawDigits = onlyDigits(numberInput);
+      if (type === 'car') {
+        rawDigits = rawDigits.slice(-4);
+      }
+      if (type === 'mobile' && rawDigits.length < 5) { alert('Please enter a valid mobile number.'); return; }
+      if (type === 'car' && rawDigits.length < 4) { alert('Please enter at least 4 digits for car number.'); return; }
+      if (type === 'house' && !rawDigits) { alert('Please enter a valid house number.'); return; }
+      const zeroRemoved = removeZeros(rawDigits);
+      if (type === 'mobile' && zeroRemoved.length < 2) { alert('The entered mobile number becomes too short after removing zeros.'); return; }
+      const moolank = digitalRootFromDigitsString(dob.dd);
+      const bhagyank = digitalRootFromDigitsString(dob.digits);
+      const processedForRoot = collapseSameConsecutiveDigits(zeroRemoved);
+      const numberRoot = processedForRoot ? digitalRootFromDigitsString(processedForRoot) : '';
+      const suitability = numberRoot ? getSuitability(numberRoot, moolank, bhagyank) : null;
+      document.getElementById('moolank').textContent = moolank || '—';
+      document.getElementById('bhagyank').textContent = bhagyank || '—';
+      document.getElementById('numberRoot').textContent = numberRoot || '—';
+      document.getElementById('numberRootLabel').textContent = type.charAt(0).toUpperCase() + type.slice(1) + ' Root';
+      const verdictEl = document.getElementById('verdict');
+      const compatibilityTitle = document.getElementById('compatibilityTitle');
+      const compatibilityBox = document.getElementById('compatibilityBox');
+      if (suitability) {
+        verdictEl.className = `verdict ${suitability.cls}`;
+        verdictEl.textContent = suitability.line;
+        compatibilityTitle.textContent = type.charAt(0).toUpperCase() + type.slice(1) + ' Compatibility Assessment';
+        compatibilityBox.textContent = suitability.paragraph.replace('mobile root', type + ' root').replace('Mobile root', type.charAt(0).toUpperCase() + type.slice(1) + ' root');
+      } else {
+        verdictEl.className = 'verdict mid';
+        verdictEl.textContent = 'Fill in your details and click Generate Analysis to see your compatibility profile.';
+        compatibilityTitle.textContent = 'Compatibility Assessment';
+        compatibilityBox.textContent = 'Your numerological compatibility analysis will appear here...';
+      }
+
+      // Show/hide pair and cluster for mobile only
+      const pairPanel = document.getElementById('pairPanel');
+      const clusterPanel = document.getElementById('clusterPanel');
+      pairPanel.style.display = 'block';
+      clusterPanel.style.display = 'block';
+      const clusters = findConsecutiveClusters(zeroRemoved);
+      const pairs = buildPairsFromOriginalZeroRemoved(zeroRemoved);
+      document.getElementById('pairResults').innerHTML = renderPairCards(pairs);
+      document.getElementById('clusterResults').innerHTML = renderClusterCards(clusters);
+    }
+    function clearAll() {
+      document.getElementById('dob').value = '';
+      document.getElementById('numberInput').value = '';
+      document.getElementById('moolank').textContent = '—';
+      document.getElementById('bhagyank').textContent = '—';
+      document.getElementById('numberRoot').textContent = '—';
+      const verdictEl = document.getElementById('verdict');
+      verdictEl.className = 'verdict mid';
+      verdictEl.textContent = 'Fill the details and click Generate Result.';
+      document.getElementById('compatibilityTitle').textContent = 'Compatibility Assessment';
+      document.getElementById('compatibilityBox').textContent = 'The final compatibility explanation will appear here.';
+      document.getElementById('pairResults').innerHTML = '<div class="pair-card no-results"><span class="pair-code">No analysis yet</span><span class="pair-meta">Generate results to display your pair interpretations.</span></div>';
+      document.getElementById('clusterResults').innerHTML = '<div class="pair-card no-results"><span class="pair-code">No pattern detected</span><span class="pair-meta">Cluster effects will appear here after generating analysis.</span></div>';
+      // Reset display
+      const type = document.getElementById('analysisType').value;
+      if (type === 'mobile') {
+        document.getElementById('pairPanel').style.display = 'block';
+        document.getElementById('clusterPanel').style.display = 'block';
+      } else {
+        document.getElementById('pairPanel').style.display = 'none';
+        document.getElementById('clusterPanel').style.display = 'none';
+      }
+    }
+    function printReport() {
+      const verdict = document.getElementById('verdict').textContent.trim();
+      if (verdict === 'Fill in your details and click Generate Analysis to see your compatibility profile.' || verdict === 'Fill the details and click Generate Result.') {
+        alert('Please generate the analysis first before printing.');
+        return;
+      }
+      document.body.classList.add('printing');
+      window.print();
+      setTimeout(() => document.body.classList.remove('printing'), 1000);
+    }
+
+    function downloadTXT() {
+      const lines = [];
+      lines.push('NUMEROLOGY PRO REPORT');
+      lines.push('');
+      lines.push('DOB: ' + (document.getElementById('dob').value || ''));
+      const type = document.getElementById('analysisType').value;
+      lines.push(type.charAt(0).toUpperCase() + type.slice(1) + ' Number: ' + (document.getElementById('numberInput').value || ''));
+      lines.push('Moolank: ' + document.getElementById('moolank').textContent);
+      lines.push('Bhagyank: ' + document.getElementById('bhagyank').textContent);
+      lines.push(type.charAt(0).toUpperCase() + type.slice(1) + ' Root: ' + document.getElementById('numberRoot').textContent);
+      lines.push('');
+      lines.push(type.toUpperCase() + ' COMPATIBILITY');
+      lines.push(document.getElementById('verdict').textContent);
+      lines.push(document.getElementById('compatibilityBox').textContent);
+      lines.push('');
+      if (type === 'mobile') {
+        lines.push('PAIR-WISE RESULT');
+        document.querySelectorAll('#pairResults .pair-card').forEach(card => { lines.push(card.innerText); lines.push(''); });
+        lines.push('CLUSTER / DOMINANCE NOTE');
+        const clusterCards = document.querySelectorAll('#clusterResults .pair-card');
+        if (!clusterCards.length) lines.push(document.getElementById('clusterResults').textContent);
+        else clusterCards.forEach(card => { lines.push(card.innerText); lines.push(''); });
+      }
+      const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'numerology_report.txt';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+    }
+  </script>
+</body>
+</html>
