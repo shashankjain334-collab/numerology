@@ -770,7 +770,7 @@
       </div>
       <div class="hero-card">
         <h1 class="title">Numerology Pro</h1>
-        <p class="subtitle">Our platform offers numerology-inspired insights based on details such as birth dates, mobile numbers, house numbers, and vehicle numbers. Using established numerological principles, we derive values like Moolank and Bhagyank, explore number relationships, and highlight patterns that may provide an interesting perspective on your numbers.
+        <p class="subtitle">Our platform offers numerology-inspired insights based on details such as birth dates, mobile numbers, house numbers, and vehicle numbers. Using established numerological principles, we derive values like Moolank, explore number relationships, and highlight patterns that may provide an interesting perspective on your numbers.
 
 Designed to encourage self-reflection and curiosity, these interpretations present a thoughtful way to explore numerical patterns in everyday life.</p>
         <div class="badge-row">
@@ -1089,26 +1089,26 @@ Designed to encourage self-reflection and curiosity, these interpretations prese
       if (String(root) === String(birthNumber)) return 'same';
       return (friendMap[String(birthNumber)] || []).includes(String(root)) ? 'friend' : 'enemy';
     }
-    function getSuitability(root, moolank, bhagyank) {
-      const r1 = relation(root, moolank), r2 = relation(root, bhagyank);
-      if (r1 === 'same' || r2 === 'same') {
+    function getSuitability(root, moolank) {
+      const relationToMoolank = relation(root, moolank);
+      if (relationToMoolank === 'same') {
         return {
           cls: 'good',
           line: 'This number is highly favourable for you.',
-          paragraph: `Your mobile root is ${root}, and it directly matches one of your core birth numbers. That usually means the number aligns naturally with your personal frequency. Its good effects become easier to hold, and its difficult effects tend to feel more manageable in real life.`
+          paragraph: `Your mobile root is ${root}, and it directly matches your Moolank ${moolank}. This usually means the number is aligned with your core personal frequency, making its positive effects easier to hold and any difficult energy more manageable.`
         };
       }
-      if ((r1 === 'friend' && r2 !== 'enemy') || (r2 === 'friend' && r1 !== 'enemy') || (r1 === 'friend' && r2 === 'friend')) {
+      if (relationToMoolank === 'friend') {
         return {
           cls: 'mid',
           line: 'This number is supportive for you.',
-          paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank} and your Bhagyank is ${bhagyank}. This combination is supportive overall. It may not feel identical to your core pattern, but it usually works without creating strong resistance and can still give stable usable results.`
+          paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank}. This is a supportive combination that typically works without creating severe resistance. It may not feel identical to your main pattern, but it is generally stable and usable.`
         };
       }
       return {
         cls: 'bad',
         line: 'This number may not suit you and can create resistance.',
-        paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank} and your Bhagyank is ${bhagyank}. This combination shows more friction than support. The number may still produce activity, but it can feel heavy, inconsistent, or harder to sustain smoothly over time.`
+        paragraph: `Your mobile root is ${root}, while your Moolank is ${moolank}. This combination shows more friction than support. The number may still produce activity, but it can feel heavy, inconsistent, or harder to sustain smoothly over time.`
       };
     }
     function renderPairCards(pairs) {
@@ -1149,7 +1149,7 @@ Designed to encourage self-reflection and curiosity, these interpretations prese
       const bhagyank = digitalRootFromDigitsString(dob.digits);
       const processedForRoot = collapseSameConsecutiveDigits(zeroRemoved);
       const numberRoot = processedForRoot ? digitalRootFromDigitsString(processedForRoot) : '';
-      const suitability = numberRoot ? getSuitability(numberRoot, moolank, bhagyank) : null;
+      const suitability = numberRoot ? getSuitability(numberRoot, moolank) : null;
       document.getElementById('moolank').textContent = moolank || '—';
       document.getElementById('bhagyank').textContent = bhagyank || '—';
       document.getElementById('numberRoot').textContent = numberRoot || '—';
